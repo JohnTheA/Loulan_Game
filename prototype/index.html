@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>楼兰 · 丝路物语（原型）</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <header id="topbar">
+    <div id="hud-time">元年 · 春</div>
+    <div id="hud-money">💰 600</div>
+    <div id="hud-loc">📍 敦煌</div>
+  </header>
+
+  <div id="map">
+    <svg id="map-svg" viewBox="0 0 100 56" preserveAspectRatio="none"></svg>
+  </div>
+
+  <div id="stage">
+    <div id="scene"></div>
+    <div id="log"></div>
+  </div>
+
+  <nav id="tabs">
+    <button class="tab active" data-tab="action">行动</button>
+    <button class="tab" data-tab="cargo">货物</button>
+    <button class="tab" data-tab="crew">商队</button>
+    <button class="tab" data-tab="codex">图鉴</button>
+  </nav>
+  <div id="panel"></div>
+
+  <div id="overlay" class="hidden">
+    <div id="modal"></div>
+  </div>
+
+</div>
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

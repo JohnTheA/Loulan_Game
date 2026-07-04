@@ -1,0 +1,135 @@
+/* 楼兰 · 丝路物语 —— 敦煌色板：土黄 石青 朱砂 沙白 */
+:root {
+  --sand: #e8d5a8;
+  --sand-dark: #c8a86b;
+  --ochre: #c8933b;
+  --azurite: #2e5e7e;
+  --cinnabar: #b33b2e;
+  --ink: #3a2c1a;
+  --paper: #f5ecd7;
+  --gold: #d9a441;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; background: #2a2118; }
+body { font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif; color: var(--ink); }
+
+#app {
+  max-width: 430px; height: 100dvh; margin: 0 auto;
+  display: flex; flex-direction: column;
+  background: var(--sand);
+  box-shadow: 0 0 40px rgba(0,0,0,.5);
+  overflow: hidden;
+}
+
+/* ── 顶栏 ── */
+#topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 12px;
+  background: var(--azurite); color: var(--paper);
+  font-size: 14px; font-weight: 600;
+  flex: 0 0 auto;
+}
+
+/* ── 地图 ── */
+#map { flex: 0 0 130px; background: linear-gradient(#d9c48f, #c8a86b); position: relative; }
+#map-svg { width: 100%; height: 100%; display: block; }
+.map-route { stroke: #a3814e; stroke-width: .8; stroke-dasharray: 2 1.4; fill: none; }
+.map-city { fill: var(--cinnabar); stroke: var(--paper); stroke-width: .6; }
+.map-city.current { fill: var(--gold); }
+.map-label { font-size: 4.5px; fill: var(--ink); font-weight: 700; }
+.map-caravan { font-size: 6px; }
+.map-decay { opacity: .55; }
+
+/* ── 主舞台 ── */
+#stage { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; background: var(--paper); border-top: 3px solid var(--ochre); border-bottom: 3px solid var(--ochre); }
+#scene {
+  flex: 0 0 84px; display: flex; align-items: center; justify-content: center;
+  font-size: 34px; letter-spacing: 6px;
+  background: linear-gradient(#fdf6e3 60%, #ecd9a8);
+  overflow: hidden; white-space: nowrap;
+}
+#scene.walking .figure { animation: bob .6s infinite alternate ease-in-out; display: inline-block; }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+#log { flex: 1 1 auto; overflow-y: auto; padding: 8px 12px; font-size: 13px; line-height: 1.75; }
+#log p { border-bottom: 1px dashed #d9c9a3; padding: 2px 0; }
+#log p.hl { color: var(--cinnabar); font-weight: 600; }
+
+/* ── 标签页 ── */
+#tabs { display: flex; flex: 0 0 auto; background: var(--ochre); }
+.tab {
+  flex: 1; padding: 10px 0; border: none; background: transparent;
+  font-size: 15px; font-weight: 700; color: #7a5a20; cursor: pointer;
+}
+.tab.active { background: var(--sand); color: var(--ink); border-radius: 10px 10px 0 0; }
+
+/* ── 操作面板 ── */
+#panel { flex: 0 0 218px; overflow-y: auto; padding: 10px; background: var(--sand); }
+.panel-title { font-size: 13px; color: #7a5a20; margin: 4px 0 6px; font-weight: 700; }
+.btn {
+  display: block; width: 100%; margin: 6px 0; padding: 11px 12px;
+  background: var(--paper); border: 2px solid var(--ochre); border-radius: 10px;
+  font-size: 15px; font-weight: 600; color: var(--ink); text-align: left; cursor: pointer;
+}
+.btn:active { transform: scale(.98); }
+.btn.primary { background: var(--azurite); border-color: var(--azurite); color: var(--paper); }
+.btn.danger { border-color: var(--cinnabar); }
+.btn:disabled { opacity: .45; }
+.btn small { float: right; font-weight: 400; color: #8a7350; }
+.btn.primary small { color: #cfe0ec; }
+
+/* 货物行 */
+.goods-row {
+  display: flex; align-items: center; gap: 6px; padding: 7px 8px; margin: 5px 0;
+  background: var(--paper); border-radius: 10px; border: 1.5px solid var(--sand-dark); font-size: 14px;
+}
+.goods-row .g-name { flex: 1; font-weight: 600; }
+.goods-row .g-price { width: 52px; text-align: right; color: var(--azurite); font-weight: 700; }
+.goods-row .g-qty { width: 40px; text-align: center; color: #7a5a20; }
+.goods-row button {
+  padding: 5px 9px; border-radius: 8px; border: none; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.goods-row .buy { background: var(--azurite); color: #fff; }
+.goods-row .sell { background: var(--cinnabar); color: #fff; }
+.goods-row button:disabled { opacity: .35; }
+
+/* 商队成员卡 */
+.crew-card {
+  display: flex; align-items: center; gap: 10px; padding: 9px 10px; margin: 6px 0;
+  background: var(--paper); border-radius: 12px; border: 2px solid var(--sand-dark); cursor: pointer;
+}
+.crew-card .c-emoji { font-size: 28px; }
+.crew-card .c-info { flex: 1; }
+.crew-card .c-name { font-weight: 700; font-size: 15px; }
+.crew-card .c-sub { font-size: 12px; color: #7a5a20; }
+.crew-card .c-mood { font-size: 12px; text-align: right; color: var(--azurite); }
+
+/* 图鉴 */
+.codex-item { padding: 8px 10px; margin: 5px 0; background: var(--paper); border-radius: 10px; font-size: 13px; border-left: 4px solid var(--gold); }
+.codex-item .ci-title { font-weight: 700; }
+.codex-item.dim { opacity: .55; border-left-color: #b9a679; }
+
+/* ── 弹窗 ── */
+#overlay {
+  position: fixed; inset: 0; background: rgba(30, 22, 10, .55);
+  display: flex; align-items: center; justify-content: center; z-index: 50; padding: 18px;
+}
+#overlay.hidden { display: none; }
+#modal {
+  width: 100%; max-width: 390px; max-height: 82dvh; overflow-y: auto;
+  background: var(--paper); border-radius: 16px; border: 3px solid var(--ochre);
+  padding: 18px 16px; box-shadow: 0 8px 30px rgba(0,0,0,.4);
+}
+#modal h3 { font-size: 17px; color: var(--cinnabar); margin-bottom: 8px; }
+#modal .m-text { font-size: 14px; line-height: 1.8; white-space: pre-wrap; margin-bottom: 12px; }
+#modal .m-text b { color: var(--azurite); }
+#modal.life-card { border-color: var(--azurite); background: linear-gradient(#f5ecd7, #e7ddc2); }
+#modal.life-card h3 { color: var(--azurite); }
+#modal .m-tag {
+  display: inline-block; font-size: 11px; background: var(--gold); color: #fff;
+  border-radius: 6px; padding: 2px 8px; margin-bottom: 8px; font-weight: 700;
+}
+
+/* 结算 */
+.score-row { display: flex; justify-content: space-between; padding: 5px 2px; font-size: 15px; border-bottom: 1px dashed #cbb98d; }
+.score-row .stars { color: var(--gold); letter-spacing: 2px; }
+.grade { text-align: center; font-size: 44px; font-weight: 900; color: var(--cinnabar); margin: 10px 0; }
