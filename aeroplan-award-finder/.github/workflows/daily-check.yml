@@ -1,0 +1,30 @@
+# 每日自动检查关注航线的里程票，结果写入 Actions 运行摘要。
+# 注意：此 workflow 只有在本项目作为独立仓库（.github 位于仓库根目录）时才会生效。
+# 需要在仓库 Settings → Secrets and variables → Actions 中配置 SEATS_AERO_API_KEY。
+
+name: daily-award-check
+
+on:
+  schedule:
+    - cron: "0 13 * * *" # 每天 UTC 13:00（温哥华早上 5/6 点）
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Search award availability
+        env:
+          SEATS_AERO_API_KEY: ${{ secrets.SEATS_AERO_API_KEY }}
+        run: |
+          cp -n routes.example.yaml routes.yaml || true
+          python -m aeroplan_finder watch --config routes.yaml --markdown | tee -a "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,26 @@
+# 关注航线配置 — 复制为 routes.yaml 后按需修改
+#
+# 每个条目字段：
+#   from / to    出发、到达机场三字码，可写多个
+#   start / end  查询日期区间（YYYY-MM-DD）
+#   cabins       economy / premium / business / first，可多选
+#   max_miles    里程上限（超过则过滤掉），可省略
+#   direct_only  是否只看直飞，默认 false
+#   source       里程计划，默认 aeroplan
+
+routes:
+  # 温哥华/多伦多 → 北京/上海/香港，商务舱
+  - from: [YVR, YYZ]
+    to: [PEK, PVG, HKG]
+    start: 2026-09-01
+    end: 2026-10-15
+    cabins: [business]
+    max_miles: 90000
+    direct_only: false
+
+  # 多伦多 → 东京，超经/商务
+  - from: [YYZ]
+    to: [HND, NRT]
+    start: 2026-11-01
+    end: 2026-11-30
+    cabins: [premium, business]
